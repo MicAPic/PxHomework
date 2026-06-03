@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector>
 #include "PxPhysicsAPI.h"
 
 class PhysicsEngine;
@@ -13,7 +14,7 @@ public:
     bool ShouldExplode() const { return fuse <= 0.0f && !exploded; }
     bool IsDone() const { return exploded; }
 
-    void Explode(PhysicsEngine* engine, Enemy* enemy);
+    void Explode(PhysicsEngine* engine, const std::vector<Enemy*>& enemies);
 
 private:
     physx::PxVec3 GetPosition() const;

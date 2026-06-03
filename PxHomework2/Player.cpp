@@ -13,8 +13,8 @@
 
 using namespace physx;
 
-Player::Player(PhysicsEngine* engineIn, Enemy* enemyIn)
-    : engine(engineIn), enemy(enemyIn),
+Player::Player(PhysicsEngine* engineIn, std::vector<Enemy*> enemiesIn)
+    : engine(engineIn), enemies(std::move(enemiesIn)),
       trailStart(0.0f), trailEnd(0.0f), trailFramesLeft(0) {
 }
 
@@ -76,10 +76,13 @@ void Player::Shoot(const PxVec3& origin, const PxVec3& dirIn) {
     const PxRaycastHit& hit = buffer.getTouch(closestIdx);
     trailEnd = hit.position;
 
-    if (enemy && hit.actor == enemy->GetActor()) {
-        std::cout << "Hit! Enemy struck at ("
-                  << hit.position.x << ", " << hit.position.y << ", " << hit.position.z << ")" << std::endl;
-        enemy->TakeDamage(Const::Shooting::DAMAGE, dir, Const::Shooting::HIT_IMPULSE);
+    for (Enemy* e : enemies) {
+        if (e && hit.actor == e->GetActor()) {
+            std::cout << "Hit! Enemy struck at ("
+                      << hit.position.x << ", " << hit.position.y << ", " << hit.position.z << ")" << std::endl;
+            e->TakeDamage(Const::Shooting::DAMAGE, dir, Const::Shooting::HIT_IMPULSE);
+            break;
+        }
     }
 }
 
@@ -100,7 +103,7 @@ void Player::Update(float dt) {
     for (auto& g : grenades) {
         g->Update(dt);
         if (g->ShouldExplode()) {
-            g->Explode(engine, enemy);
+            g->Explode(engine, enemies);
         }
     }
 

@@ -26,6 +26,7 @@ namespace Const {
         constexpr float LINEAR_DAMPING = 0.2f;
         constexpr float ANGULAR_DAMPING = 0.2f;
         const physx::PxVec3 SPAWN_POINT = physx::PxVec3(0.0f, 1.4f, 18.0f);
+        const physx::PxVec3 SPAWN_POINT_2 = physx::PxVec3(5.0f, 1.4f, 12.0f);
         constexpr float MAX_HEALTH = 100.0f;
         constexpr float MIN_HEALTH = 0.0f;
     }

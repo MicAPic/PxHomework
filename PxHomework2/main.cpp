@@ -13,6 +13,7 @@ PhysicsEngine* physicsEngine = nullptr;
 Snippets::Camera* camera = nullptr;
 Player* player = nullptr;
 Enemy* enemy = nullptr;
+Enemy* enemy2 = nullptr;
 
 void CreateObstacles(PxMaterial* material) {
     for (const auto& def : Const::OBSTACLES) {
@@ -28,7 +29,8 @@ void SetupScene() {
     CreateObstacles(groundMaterial);
 
     enemy = new Enemy(physicsEngine, Const::Enemy::SPAWN_POINT);
-    player = new Player(physicsEngine, enemy);
+    enemy2 = new Enemy(physicsEngine, Const::Enemy::SPAWN_POINT_2);
+    player = new Player(physicsEngine, { enemy, enemy2 });
 }
 
 void keyPressedCallback(unsigned char key, const PxTransform& cameraTransform) {
@@ -64,6 +66,7 @@ void renderCallback() {
 
 void exitCallback() {
     delete player;
+    delete enemy2;
     delete enemy;
     delete camera;
     delete physicsEngine;

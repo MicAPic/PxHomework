@@ -10,7 +10,7 @@ class Grenade;
 
 class Player {
 public:
-    Player(PhysicsEngine* engine, Enemy* enemy);
+    Player(PhysicsEngine* engine, std::vector<Enemy*> enemiesIn);
     ~Player();
 
     void Shoot(const physx::PxVec3& origin, const physx::PxVec3& dir);
@@ -23,7 +23,7 @@ public:
 
 private:
     PhysicsEngine* engine;
-    Enemy* enemy;
+    std::vector<Enemy*> enemies;
     std::vector<std::unique_ptr<Grenade>> grenades;
 
     physx::PxVec3 trailStart;
