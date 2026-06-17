@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PxHomework1", "PxHomework1\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PxHomework2", "PxHomework2\PxHomework2.vcxproj", "{47268884-7F35-4D74-AB6C-79461F591F64}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PxHomework3", "PxHomework3\PxHomework3.vcxproj", "{8F3E2A1C-9B4D-4E5F-A6B7-C8D9E0F1A2B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{47268884-7F35-4D74-AB6C-79461F591F64}.Release|x64.Build.0 = Release|x64
 		{47268884-7F35-4D74-AB6C-79461F591F64}.Release|x86.ActiveCfg = Release|Win32
 		{47268884-7F35-4D74-AB6C-79461F591F64}.Release|x86.Build.0 = Release|Win32
+		{8F3E2A1C-9B4D-4E5F-A6B7-C8D9E0F1A2B3}.Debug|x64.ActiveCfg = Debug|x64
+		{8F3E2A1C-9B4D-4E5F-A6B7-C8D9E0F1A2B3}.Debug|x64.Build.0 = Debug|x64
+		{8F3E2A1C-9B4D-4E5F-A6B7-C8D9E0F1A2B3}.Debug|x86.ActiveCfg = Debug|Win32
+		{8F3E2A1C-9B4D-4E5F-A6B7-C8D9E0F1A2B3}.Debug|x86.Build.0 = Debug|Win32
+		{8F3E2A1C-9B4D-4E5F-A6B7-C8D9E0F1A2B3}.Release|x64.ActiveCfg = Release|x64
+		{8F3E2A1C-9B4D-4E5F-A6B7-C8D9E0F1A2B3}.Release|x64.Build.0 = Release|x64
+		{8F3E2A1C-9B4D-4E5F-A6B7-C8D9E0F1A2B3}.Release|x86.ActiveCfg = Release|Win32
+		{8F3E2A1C-9B4D-4E5F-A6B7-C8D9E0F1A2B3}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
