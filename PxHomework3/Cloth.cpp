@@ -1,5 +1,6 @@
 #include "Cloth.h"
 #include "PhysicsEngine.h"
+#include "FlagConstants.h"
 
 using namespace physx;
 
@@ -29,6 +30,21 @@ Cloth::Cloth(std::vector<PxVec3> points, std::vector<uint32_t> triangles, std::v
 	nv::cloth::Range<PxVec4> particlesRange(particles.data(), particles.data() + particles.size());
 	cloth = factory->createCloth(particlesRange, *fabric);
 	cloth->setGravity(physicsEngine->scene->getGravity());
+	cloth->setSolverFrequency(Const::Flag::SOLVER_FREQUENCY);
+	cloth->setFluidDensity(Const::Flag::FLUID_DENSITY);
+
+	const uint32_t phaseCount = fabric->getNumPhases();
+	std::vector<nv::cloth::PhaseConfig> phases(phaseCount);
+	for (uint32_t i = 0; i < phaseCount; i++) {
+		phases[i].mPhaseIndex = static_cast<uint16_t>(i);
+		phases[i].mStiffness = Const::Flag::PHASE_STIFFNESS;
+		phases[i].mStiffnessMultiplier = Const::Flag::PHASE_STIFFNESS_MULTIPLIER;
+		phases[i].mCompressionLimit = Const::Flag::PHASE_COMPRESSION_LIMIT;
+		phases[i].mStretchLimit = Const::Flag::PHASE_STRETCH_LIMIT;
+	}
+	if (phaseCount > 0) {
+		cloth->setPhaseConfig(nv::cloth::Range<nv::cloth::PhaseConfig>(phases.data(), phases.data() + phases.size()));
+	}
 
 	indices = triangles;
 }

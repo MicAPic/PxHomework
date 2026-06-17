@@ -13,12 +13,17 @@ namespace Const {
         constexpr float TOP_Y = 12.0f;
 
         const physx::PxVec3 DAMPING = physx::PxVec3(0.1f, 0.1f, 0.1f);
-        constexpr float DRAG_COEFFICIENT = 0.4f;
-        constexpr float LIFT_COEFFICIENT = 0.5f;
+        constexpr float DRAG_COEFFICIENT = 0.55f;
+        constexpr float LIFT_COEFFICIENT = 0.42f;
 
-        // доп ветер для прямоугольного флага, чтобы не падал
-        const physx::PxVec3 FLY_WIND = physx::PxVec3(5.5f, 0.0f, 3.0f);
+        constexpr float SOLVER_FREQUENCY = 240.0f;
+        constexpr float FLUID_DENSITY = 1.0f;
+        constexpr float PHASE_STIFFNESS = 0.65f;
+        constexpr float PHASE_STIFFNESS_MULTIPLIER = 1.0f;
+        constexpr float PHASE_COMPRESSION_LIMIT = 1.0f;
+        constexpr float PHASE_STRETCH_LIMIT = 1.0f;
 
+        const physx::PxVec3 FLY_WIND = physx::PxVec3(0.0f, 0.0f, 0.0f);
         const physx::PxVec3 COLOR = physx::PxVec3(0.1f, 0.3f, 0.9f);
     }
 
@@ -46,6 +51,6 @@ namespace Const {
 
     namespace Wind {
         const physx::PxVec3 DIRECTION = physx::PxVec3(0.0f, 0.0f, 1.0f);
-        constexpr float SPEED = 1.5f;
+        constexpr float SPEED = 3.0f;
     }
 }
