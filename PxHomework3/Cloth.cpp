@@ -58,7 +58,7 @@ nv::cloth::Cloth* Cloth::Get() const {
 	return cloth;
 }
 
-std::vector<uint32_t> Cloth::GetMeshIndices() const {
+const std::vector<uint32_t>& Cloth::GetMeshIndices() const {
 	return indices;
 }
 
@@ -90,14 +90,6 @@ void Cloth::SetLiftCoefficient(float liftCoefficient) {
 	cloth->setLiftCoefficient(liftCoefficient);
 }
 
-void Cloth::SetWindVelocity(PxVec3 wind) {
+void Cloth::SetWind(PxVec3 wind) {
 	cloth->setWindVelocity(wind);
-}
-
-void Cloth::SetAdditionalWind(PxVec3 wind) {
-	additionalWind = wind;
-}
-
-void Cloth::ApplyWind(PxVec3 gustWind) {
-	cloth->setWindVelocity(additionalWind + gustWind);
 }

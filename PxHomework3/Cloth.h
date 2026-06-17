@@ -13,7 +13,7 @@ public:
 	~Cloth();
 
 	nv::cloth::Cloth* Get() const;
-	std::vector<uint32_t> GetMeshIndices() const;
+	const std::vector<uint32_t>& GetMeshIndices() const;
 	uint32_t GetNumParticles() const;
 	physx::PxVec4* GetCurrentParticles() const;
 
@@ -21,14 +21,11 @@ public:
 	void SetDamping(physx::PxVec3 damping);
 	void SetDragCoefficient(float dragCoefficient);
 	void SetLiftCoefficient(float liftCoefficient);
-	void SetWindVelocity(physx::PxVec3 wind);
 
-	void SetAdditionalWind(physx::PxVec3 wind);
-	void ApplyWind(physx::PxVec3 gustWind);
+	void SetWind(physx::PxVec3 wind);
 
 private:
 	nv::cloth::Fabric* fabric;
 	nv::cloth::Cloth* cloth;
 	std::vector<uint32_t> indices;
-	physx::PxVec3 additionalWind = physx::PxVec3(0.0f);
 };

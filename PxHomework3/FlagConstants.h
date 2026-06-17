@@ -23,7 +23,6 @@ namespace Const {
         constexpr float PHASE_COMPRESSION_LIMIT = 1.0f;
         constexpr float PHASE_STRETCH_LIMIT = 1.0f;
 
-        const physx::PxVec3 FLY_WIND = physx::PxVec3(0.0f, 0.0f, 0.0f);
         const physx::PxVec3 COLOR = physx::PxVec3(0.1f, 0.3f, 0.9f);
     }
 

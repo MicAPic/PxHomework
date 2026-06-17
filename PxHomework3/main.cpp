@@ -25,12 +25,11 @@ static void AddCrossbar(PxMaterial* material, float xStart, float xEnd, float y)
 	physicsEngine->AddStaticActor(shape, PxVec3((xStart + xEnd) * 0.5f, y, 0.0f), PxQuat(PxIdentity));
 }
 
-static Cloth* SpawnFlag(const FlagMesh& mesh, PxVec3 additionalWind = PxVec3(0.0f)) {
+static Cloth* SpawnFlag(const FlagMesh& mesh) {
 	Cloth* cloth = new Cloth(mesh.points, mesh.triangles, mesh.invMasses);
 	cloth->SetDamping(Const::Flag::DAMPING);
 	cloth->SetDragCoefficient(Const::Flag::DRAG_COEFFICIENT);
 	cloth->SetLiftCoefficient(Const::Flag::LIFT_COEFFICIENT);
-	cloth->SetAdditionalWind(additionalWind);
 
 	std::vector<PxVec4> planes = { PxVec4(0.0f, 1.0f, 0.0f, 0.0f) };
 	std::vector<uint32_t> planesIndices = { 1 };
@@ -47,7 +46,7 @@ static void SetupScene() {
 	// прямоугольный флаг закрепленный по левому краю
 	PxVec3 rectOrigin = Const::Scene::RECT_ORIGIN;
 	AddPole(material, rectOrigin.x);
-	SpawnFlag(FlagBuilder::BuildRectangle(rectOrigin, Const::Flag::WIDTH, Const::Flag::HEIGHT, Const::Flag::COLS, Const::Flag::ROWS), Const::Flag::FLY_WIND);
+	SpawnFlag(FlagBuilder::BuildRectangle(rectOrigin, Const::Flag::WIDTH, Const::Flag::HEIGHT, Const::Flag::COLS, Const::Flag::ROWS));
 
 	// непрямоугольный флаг
 	PxVec3 bannerOrigin = Const::Scene::BANNER_ORIGIN;
@@ -67,7 +66,7 @@ void renderCallback() {
 	wind->Update(dt);
 	PxVec3 windVelocity = wind->GetVelocity();
 	for (Cloth* cloth : physicsEngine->GetCloths()) {
-		cloth->ApplyWind(windVelocity);
+		cloth->SetWind(windVelocity);
 	}
 
 	physicsEngine->Simulate(dt);
@@ -83,7 +82,7 @@ void renderCallback() {
 	for (Cloth* cloth : physicsEngine->GetCloths()) {
 		uint32_t particleNum = cloth->GetNumParticles();
 		PxVec4* particles = cloth->GetCurrentParticles();
-		std::vector<uint32_t> indices = cloth->GetMeshIndices();
+		const std::vector<uint32_t>& indices = cloth->GetMeshIndices();
 
 		glDisable(GL_CULL_FACE);
 		Snippets::renderMesh(particleNum, particles, static_cast<PxU32>(indices.size() / 3), indices.data(), flagColor);
